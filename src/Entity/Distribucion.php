@@ -24,6 +24,10 @@ class Distribucion
     #[ORM\JoinColumn(nullable: false)]
     private ?desarrollador $desarollador = null;
 
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?provincias $provincia = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -61,6 +65,18 @@ class Distribucion
     public function setDesarollador(?desarrollador $desarollador): self
     {
         $this->desarollador = $desarollador;
+
+        return $this;
+    }
+
+    public function getProvincia(): ?provincias
+    {
+        return $this->provincia;
+    }
+
+    public function setProvincia(?provincias $provincia): self
+    {
+        $this->provincia = $provincia;
 
         return $this;
     }
