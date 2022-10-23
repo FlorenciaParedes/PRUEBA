@@ -31,10 +31,14 @@ class Vacuna
     #[ORM\OneToMany(mappedBy: 'condicion', targetEntity: Condiciones::class)]
     private Collection $condiciones;
 
+    #[ORM\ManyToMany(targetEntity: patologia::class, inversedBy: 'vacunas')]
+    private Collection $patologia;
+
     public function __construct()
     {
         $this->desarrolladores = new ArrayCollection();
         $this->condiciones = new ArrayCollection();
+        $this->patologia = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -131,6 +135,30 @@ class Vacuna
                 $condicione->setCondicion(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, patologia>
+     */
+    public function getPatologia(): Collection
+    {
+        return $this->patologia;
+    }
+
+    public function addPatologium(patologia $patologium): self
+    {
+        if (!$this->patologia->contains($patologium)) {
+            $this->patologia->add($patologium);
+        }
+
+        return $this;
+    }
+
+    public function removePatologium(patologia $patologium): self
+    {
+        $this->patologia->removeElement($patologium);
 
         return $this;
     }
