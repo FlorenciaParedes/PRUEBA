@@ -16,9 +16,6 @@ class Compra
     #[ORM\Column]
     private ?int $cantidad = null;
 
-    #[ORM\Column(length: 30)]
-    private ?string $estado = null;
-
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
     private ?vacuna $vacuna = null;
@@ -26,6 +23,10 @@ class Compra
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
     private ?desarrollador $desarrollador = null;
+
+    #[ORM\ManyToOne(inversedBy: 'compras')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?estado $estado = null;
 
     public function getId(): ?int
     {
@@ -40,18 +41,6 @@ class Compra
     public function setCantidad(int $cantidad): self
     {
         $this->cantidad = $cantidad;
-
-        return $this;
-    }
-
-    public function getEstado(): ?string
-    {
-        return $this->estado;
-    }
-
-    public function setEstado(string $estado): self
-    {
-        $this->estado = $estado;
 
         return $this;
     }
@@ -76,6 +65,18 @@ class Compra
     public function setDesarrollador(?desarrollador $desarrollador): self
     {
         $this->desarrollador = $desarrollador;
+
+        return $this;
+    }
+
+    public function getEstado(): ?estado
+    {
+        return $this->estado;
+    }
+
+    public function setEstado(?estado $estado): self
+    {
+        $this->estado = $estado;
 
         return $this;
     }
