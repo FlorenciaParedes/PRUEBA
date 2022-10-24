@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\Vacuna;
+use App\Entity\Vacunas;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Vacuna>
+ * @extends ServiceEntityRepository<Vacunas>
  *
- * @method Vacuna|null find($id, $lockMode = null, $lockVersion = null)
- * @method Vacuna|null findOneBy(array $criteria, array $orderBy = null)
- * @method Vacuna[]    findAll()
- * @method Vacuna[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Vacunas|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Vacunas|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Vacunas[]    findAll()
+ * @method Vacunas[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class VacunaRepository extends ServiceEntityRepository
+class VacunasRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Vacuna::class);
+        parent::__construct($registry, Vacunas::class);
     }
 
-    public function save(Vacuna $entity, bool $flush = false): void
+    public function save(Vacunas $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class VacunaRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Vacuna $entity, bool $flush = false): void
+    public function remove(Vacunas $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class VacunaRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return Vacuna[] Returns an array of Vacuna objects
+//     * @return Vacunas[] Returns an array of Vacunas objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class VacunaRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Vacuna
+//    public function findOneBySomeField($value): ?Vacunas
 //    {
 //        return $this->createQueryBuilder('v')
 //            ->andWhere('v.exampleField = :val')

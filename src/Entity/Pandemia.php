@@ -24,11 +24,10 @@ class Pandemia
     private ?\DateTimeInterface $fechaFin = null;
 
     #[ORM\Column]
-    private ?bool $activa = null;
+    private ?bool $isActiva = null;
 
-    #[ORM\OneToOne(inversedBy: 'pandemia', cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?patologia $patologia = null;
+    #[ORM\OneToOne(mappedBy: 'Pandemia', cascade: ['persist', 'remove'])]
+    private ?Patologia $patologia = null;
 
     public function getId(): ?int
     {
@@ -71,25 +70,35 @@ class Pandemia
         return $this;
     }
 
-    public function isActiva(): ?bool
+    public function isIsActiva(): ?bool
     {
-        return $this->activa;
+        return $this->isActiva;
     }
 
-    public function setActiva(bool $activa): self
+    public function setIsActiva(bool $isActiva): self
     {
-        $this->activa = $activa;
+        $this->isActiva = $isActiva;
 
         return $this;
     }
 
-    public function getPatologia(): ?patologia
+    public function getPatologia(): ?Patologia
     {
         return $this->patologia;
     }
 
-    public function setPatologia(patologia $patologia): self
+    public function setPatologia(?Patologia $patologia): self
     {
+        // unset the owning side of the relation if necessary
+        if ($patologia === null && $this->patologia !== null) {
+            $this->patologia->setPandemia(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($patologia !== null && $patologia->getPandemia() !== $this) {
+            $patologia->setPandemia($this);
+        }
+
         $this->patologia = $patologia;
 
         return $this;

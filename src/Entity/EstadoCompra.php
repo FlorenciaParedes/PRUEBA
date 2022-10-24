@@ -2,23 +2,23 @@
 
 namespace App\Entity;
 
-use App\Repository\EstadoRepository;
+use App\Repository\EstadoCompraRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: EstadoRepository::class)]
-class Estado
+#[ORM\Entity(repositoryClass: EstadoCompraRepository::class)]
+class EstadoCompra
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 30)]
+    #[ORM\Column(length: 200)]
     private ?string $descripcion = null;
 
-    #[ORM\OneToMany(mappedBy: 'estado', targetEntity: Compra::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'estado', targetEntity: Compra::class)]
     private Collection $compras;
 
     public function __construct()

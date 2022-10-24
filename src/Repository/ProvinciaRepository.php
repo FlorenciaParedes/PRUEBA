@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\Provincias;
+use App\Entity\Provincia;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Provincias>
+ * @extends ServiceEntityRepository<Provincia>
  *
- * @method Provincias|null find($id, $lockMode = null, $lockVersion = null)
- * @method Provincias|null findOneBy(array $criteria, array $orderBy = null)
- * @method Provincias[]    findAll()
- * @method Provincias[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Provincia|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Provincia|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Provincia[]    findAll()
+ * @method Provincia[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ProvinciasRepository extends ServiceEntityRepository
+class ProvinciaRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Provincias::class);
+        parent::__construct($registry, Provincia::class);
     }
 
-    public function save(Provincias $entity, bool $flush = false): void
+    public function save(Provincia $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class ProvinciasRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Provincias $entity, bool $flush = false): void
+    public function remove(Provincia $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class ProvinciasRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return Provincias[] Returns an array of Provincias objects
+//     * @return Provincia[] Returns an array of Provincia objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class ProvinciasRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Provincias
+//    public function findOneBySomeField($value): ?Provincia
 //    {
 //        return $this->createQueryBuilder('p')
 //            ->andWhere('p.exampleField = :val')

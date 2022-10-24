@@ -15,11 +15,11 @@ class Desarrollador
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToMany(targetEntity: vacuna::class, inversedBy: 'desarrolladores')]
-    private Collection $vacunas;
-
-    #[ORM\Column(length: 30)]
+    #[ORM\Column(length: 50)]
     private ?string $laboratorio = null;
+
+    #[ORM\ManyToMany(targetEntity: Vacunas::class, inversedBy: 'desarolladores')]
+    private Collection $vacunas;
 
     public function __construct()
     {
@@ -31,30 +31,6 @@ class Desarrollador
         return $this->id;
     }
 
-    /**
-     * @return Collection<int, vacuna>
-     */
-    public function getVacunas(): Collection
-    {
-        return $this->vacunas;
-    }
-
-    public function addVacuna(vacuna $vacuna): self
-    {
-        if (!$this->vacunas->contains($vacuna)) {
-            $this->vacunas->add($vacuna);
-        }
-
-        return $this;
-    }
-
-    public function removeVacuna(vacuna $vacuna): self
-    {
-        $this->vacunas->removeElement($vacuna);
-
-        return $this;
-    }
-
     public function getLaboratorio(): ?string
     {
         return $this->laboratorio;
@@ -63,6 +39,30 @@ class Desarrollador
     public function setLaboratorio(string $laboratorio): self
     {
         $this->laboratorio = $laboratorio;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Vacunas>
+     */
+    public function getVacunas(): Collection
+    {
+        return $this->vacunas;
+    }
+
+    public function addVacuna(Vacunas $vacuna): self
+    {
+        if (!$this->vacunas->contains($vacuna)) {
+            $this->vacunas->add($vacuna);
+        }
+
+        return $this;
+    }
+
+    public function removeVacuna(Vacunas $vacuna): self
+    {
+        $this->vacunas->removeElement($vacuna);
 
         return $this;
     }

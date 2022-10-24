@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\Estado;
+use App\Entity\EstadoCompra;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Estado>
+ * @extends ServiceEntityRepository<EstadoCompra>
  *
- * @method Estado|null find($id, $lockMode = null, $lockVersion = null)
- * @method Estado|null findOneBy(array $criteria, array $orderBy = null)
- * @method Estado[]    findAll()
- * @method Estado[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method EstadoCompra|null find($id, $lockMode = null, $lockVersion = null)
+ * @method EstadoCompra|null findOneBy(array $criteria, array $orderBy = null)
+ * @method EstadoCompra[]    findAll()
+ * @method EstadoCompra[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class EstadoRepository extends ServiceEntityRepository
+class EstadoCompraRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Estado::class);
+        parent::__construct($registry, EstadoCompra::class);
     }
 
-    public function save(Estado $entity, bool $flush = false): void
+    public function save(EstadoCompra $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class EstadoRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Estado $entity, bool $flush = false): void
+    public function remove(EstadoCompra $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class EstadoRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return Estado[] Returns an array of Estado objects
+//     * @return EstadoCompra[] Returns an array of EstadoCompra objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class EstadoRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Estado
+//    public function findOneBySomeField($value): ?EstadoCompra
 //    {
 //        return $this->createQueryBuilder('e')
 //            ->andWhere('e.exampleField = :val')

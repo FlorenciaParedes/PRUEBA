@@ -18,15 +18,15 @@ class Distribucion
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?vacuna $vacuna = null;
+    private ?Vacunas $vacuna = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?desarrollador $desarollador = null;
+    private ?Desarrollador $desarrollador = null;
 
-    #[ORM\ManyToOne]
+    #[ORM\ManyToOne(inversedBy: 'distribuciones')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?provincias $provincia = null;
+    private ?Provincia $provincia = null;
 
     public function getId(): ?int
     {
@@ -45,36 +45,36 @@ class Distribucion
         return $this;
     }
 
-    public function getVacuna(): ?vacuna
+    public function getVacuna(): ?Vacunas
     {
         return $this->vacuna;
     }
 
-    public function setVacuna(?vacuna $vacuna): self
+    public function setVacuna(?Vacunas $vacuna): self
     {
         $this->vacuna = $vacuna;
 
         return $this;
     }
 
-    public function getDesarollador(): ?desarrollador
+    public function getDesarrollador(): ?Desarrollador
     {
-        return $this->desarollador;
+        return $this->desarrollador;
     }
 
-    public function setDesarollador(?desarrollador $desarollador): self
+    public function setDesarrollador(?Desarrollador $desarrollador): self
     {
-        $this->desarollador = $desarollador;
+        $this->desarrollador = $desarrollador;
 
         return $this;
     }
 
-    public function getProvincia(): ?provincias
+    public function getProvincia(): ?Provincia
     {
         return $this->provincia;
     }
 
-    public function setProvincia(?provincias $provincia): self
+    public function setProvincia(?Provincia $provincia): self
     {
         $this->provincia = $provincia;
 

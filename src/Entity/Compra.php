@@ -18,15 +18,15 @@ class Compra
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?vacuna $vacuna = null;
+    private ?Vacunas $vacuna = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?desarrollador $desarrollador = null;
+    private ?Desarrollador $desarrollador = null;
 
     #[ORM\ManyToOne(inversedBy: 'compras')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?estado $estado = null;
+    private ?EstadoCompra $estado = null;
 
     public function getId(): ?int
     {
@@ -45,36 +45,36 @@ class Compra
         return $this;
     }
 
-    public function getVacuna(): ?vacuna
+    public function getVacuna(): ?Vacunas
     {
         return $this->vacuna;
     }
 
-    public function setVacuna(?vacuna $vacuna): self
+    public function setVacuna(?Vacunas $vacuna): self
     {
         $this->vacuna = $vacuna;
 
         return $this;
     }
 
-    public function getDesarrollador(): ?desarrollador
+    public function getDesarrollador(): ?Desarrollador
     {
         return $this->desarrollador;
     }
 
-    public function setDesarrollador(?desarrollador $desarrollador): self
+    public function setDesarrollador(?Desarrollador $desarrollador): self
     {
         $this->desarrollador = $desarrollador;
 
         return $this;
     }
 
-    public function getEstado(): ?estado
+    public function getEstado(): ?EstadoCompra
     {
         return $this->estado;
     }
 
-    public function setEstado(?estado $estado): self
+    public function setEstado(?EstadoCompra $estado): self
     {
         $this->estado = $estado;
 

@@ -18,13 +18,13 @@ class Patologia
     #[ORM\Column(length: 30)]
     private ?string $nombre = null;
 
-    #[ORM\OneToOne(mappedBy: 'patologia', cascade: ['persist', 'remove'])]
-    private ?Pandemia $pandemia = null;
-
     #[ORM\Column]
-    private ?bool $pandemiaActiva = null;
+    private ?bool $isPandemia = null;
 
-    #[ORM\ManyToMany(targetEntity: Vacuna::class, mappedBy: 'patologia')]
+    #[ORM\OneToOne(inversedBy: 'patologia', cascade: ['persist', 'remove'])]
+    private ?Pandemia $Pandemia = null;
+
+    #[ORM\ManyToMany(targetEntity: Vacunas::class, mappedBy: 'patologia')]
     private Collection $vacunas;
 
     public function __construct()
@@ -49,44 +49,39 @@ class Patologia
         return $this;
     }
 
-    public function getPandemia(): ?Pandemia
+    public function isIsPandemia(): ?bool
     {
-        return $this->pandemia;
+        return $this->isPandemia;
     }
 
-    public function setPandemia(Pandemia $pandemia): self
+    public function setIsPandemia(bool $isPandemia): self
     {
-        // set the owning side of the relation if necessary
-        if ($pandemia->getPatologia() !== $this) {
-            $pandemia->setPatologia($this);
-        }
-
-        $this->pandemia = $pandemia;
+        $this->isPandemia = $isPandemia;
 
         return $this;
     }
 
-    public function isPandemiaActiva(): ?bool
+    public function getPandemia(): ?Pandemia
     {
-        return $this->pandemiaActiva;
+        return $this->Pandemia;
     }
 
-    public function setPandemiaActiva(bool $pandemiaActiva): self
+    public function setPandemia(?Pandemia $Pandemia): self
     {
-        $this->pandemiaActiva = $pandemiaActiva;
+        $this->Pandemia = $Pandemia;
 
         return $this;
     }
 
     /**
-     * @return Collection<int, Vacuna>
+     * @return Collection<int, Vacunas>
      */
     public function getVacunas(): Collection
     {
         return $this->vacunas;
     }
 
-    public function addVacuna(Vacuna $vacuna): self
+    public function addVacuna(Vacunas $vacuna): self
     {
         if (!$this->vacunas->contains($vacuna)) {
             $this->vacunas->add($vacuna);
@@ -96,7 +91,7 @@ class Patologia
         return $this;
     }
 
-    public function removeVacuna(Vacuna $vacuna): self
+    public function removeVacuna(Vacunas $vacuna): self
     {
         if ($this->vacunas->removeElement($vacuna)) {
             $vacuna->removePatologium($this);

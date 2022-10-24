@@ -17,13 +17,13 @@ class Lote
     private ?int $id = null;
 
     #[ORM\Column]
-    private ?int $identificador = null;
-
-    #[ORM\OneToMany(mappedBy: 'lote', targetEntity: Vacuna::class)]
-    private Collection $vacunas;
+    private ?int $Identificador = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $fechaVencimiento = null;
+
+    #[ORM\OneToMany(mappedBy: 'lote', targetEntity: Vacunas::class)]
+    private Collection $vacunas;
 
     public function __construct()
     {
@@ -37,42 +37,12 @@ class Lote
 
     public function getIdentificador(): ?int
     {
-        return $this->identificador;
+        return $this->Identificador;
     }
 
-    public function setIdentificador(int $identificador): self
+    public function setIdentificador(int $Identificador): self
     {
-        $this->identificador = $identificador;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Vacuna>
-     */
-    public function getVacunas(): Collection
-    {
-        return $this->vacunas;
-    }
-
-    public function addVacuna(Vacuna $vacuna): self
-    {
-        if (!$this->vacunas->contains($vacuna)) {
-            $this->vacunas->add($vacuna);
-            $vacuna->setLote($this);
-        }
-
-        return $this;
-    }
-
-    public function removeVacuna(Vacuna $vacuna): self
-    {
-        if ($this->vacunas->removeElement($vacuna)) {
-            // set the owning side to null (unless already changed)
-            if ($vacuna->getLote() === $this) {
-                $vacuna->setLote(null);
-            }
-        }
+        $this->Identificador = $Identificador;
 
         return $this;
     }
@@ -85,6 +55,36 @@ class Lote
     public function setFechaVencimiento(\DateTimeInterface $fechaVencimiento): self
     {
         $this->fechaVencimiento = $fechaVencimiento;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Vacunas>
+     */
+    public function getVacunas(): Collection
+    {
+        return $this->vacunas;
+    }
+
+    public function addVacuna(Vacunas $vacuna): self
+    {
+        if (!$this->vacunas->contains($vacuna)) {
+            $this->vacunas->add($vacuna);
+            $vacuna->setLote($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVacuna(Vacunas $vacuna): self
+    {
+        if ($this->vacunas->removeElement($vacuna)) {
+            // set the owning side to null (unless already changed)
+            if ($vacuna->getLote() === $this) {
+                $vacuna->setLote(null);
+            }
+        }
 
         return $this;
     }
