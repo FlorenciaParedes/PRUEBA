@@ -2,28 +2,28 @@
 
 namespace App\Form;
 
-use App\Entity\Patologia;
+use App\Entity\Pandemia;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-class PatologiaFormType extends AbstractType
+class PandemiaFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('nombre')
-//            ->add('isPandemia')
-//            ->add('Pandemia')
-            ->add('Guardar', SubmitType::class)
+            ->add('fechaInicio')
+            ->add('fechaFin')
+            ->add('isActiva')
+            ->add('patologia')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Patologia::class,
+            'data_class' => Pandemia::class,
         ]);
     }
 }

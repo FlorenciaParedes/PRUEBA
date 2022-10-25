@@ -3,5 +3,10 @@
 {% block title %}Hello PatologiaController!{% endblock %}
 
 {% block body %}
+    {% for message in app.flashes('exito') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}    
     {{form(formulario)}}
 {% endblock %}
